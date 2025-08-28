@@ -31,6 +31,7 @@ const signUp = async (req, res) => {
     }
 }
 
+
 const login = async (req, res) => {
     try {
         const { email, password } = req.body
@@ -60,7 +61,7 @@ const login = async (req, res) => {
         console.log("login error", err)
         return res.status(500).json({ message: `login Error: ${err.message}` })
     }
-} 
+}
 
 const logout = async (req, res) => {
     try {
@@ -75,4 +76,30 @@ const logout = async (req, res) => {
     }
 }
 
-export { signUp, login, logout }
+const googleLogin = async (req, res) => {
+    try {
+        let { name, email } = req.body;
+        let user = await User.findOne({ email })
+        if (!user) {
+            user = await User.create({
+                name, email
+            })
+        }
+
+        let token = await generateAuthToken(user._id)
+        res.cookie("token", token, {
+            httpOnly: true,
+            secure: false,
+            sameSite: "Strict",
+            maxAge: 7 * 24 * 60 * 60 * 1000
+        })
+        return res.status(200).json(user)
+
+    } catch (error) {
+        console.log("googleLogin error")
+        return res.status(500).json({ message: `googleLogin error ${error}` })
+    }
+
+}
+
+export { signUp, login, logout, googleLogin }

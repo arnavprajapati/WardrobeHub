@@ -5,6 +5,8 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import ClipLoader from "react-spinners/ClipLoader";
 import { authDataContext } from "../context/AuthContext.jsx";
+import { signInWithPopup } from "firebase/auth";
+import { auth, provider } from "../utils/Firebase.js";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -40,10 +42,29 @@ const LoginPage = () => {
     }
   };
 
+  const googleLogin = async () => {
+    try {
+      const response = await signInWithPopup(auth, provider)
+      // console.log(response);
+      let user = response.user;
+      let name = user.displayName;
+      let email = user.email;
+
+      const result = await axios.post(serverURL + "/api/auth/google-login", { name, email }, {
+        withCredentials: true,
+      });
+      console.log(result.data);
+      navigate("/");
+      toast.success("Sign Up Successful 🎉");
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
       <div className="w-full max-w-md bg-white rounded-2xl p-8 shadow-xl border border-gray-100">
-        {/* Header */}
+
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-gray-900">Welcome Back 👋</h1>
           <p className="text-gray-500 mt-2 text-sm">
@@ -51,7 +72,6 @@ const LoginPage = () => {
           </p>
         </div>
 
-        {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-5">
           <div className="relative">
             <FaEnvelope className="absolute left-3 top-3.5 text-gray-400" />
@@ -93,20 +113,17 @@ const LoginPage = () => {
           </button>
         </form>
 
-        {/* Divider */}
         <div className="my-6 flex items-center">
           <div className="flex-1 border-t border-gray-300"></div>
           <span className="px-4 text-gray-500 text-sm">or</span>
           <div className="flex-1 border-t border-gray-300"></div>
         </div>
 
-        {/* Google Login */}
-        <button className="w-full flex items-center justify-center gap-2 border border-gray-300 py-3 rounded-lg hover:bg-gray-100 transition">
+        <button className="w-full flex items-center justify-center gap-2 border border-gray-300 py-3 rounded-lg hover:bg-gray-100 transition" onClick={() => { googleLogin() }}>
           <FaGoogle className="text-red-500" />
           <span>Log in with Google</span>
         </button>
 
-        {/* Footer */}
         <p className="text-center text-gray-600 text-sm mt-6">
           Don’t have an account?
           <Link to="/signup" className="text-black ml-1 font-medium hover:underline">
