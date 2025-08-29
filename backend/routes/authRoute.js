@@ -4,7 +4,7 @@ import { login, logout, signUp, googleLogin } from '../controllers/authControlle
 const router = express.Router() 
 router.post('/signup', signUp)
 router.post('/login', login)
-router.post('/logout', logout)
+router.get('/logout', logout)
 router.post('/google-login', googleLogin)
 
 export default router
