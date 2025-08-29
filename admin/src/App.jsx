@@ -11,7 +11,7 @@ import AdminNavbar from './components/AdminNavbar.jsx';
 
 const App = () => {
   const { adminData } = useContext(adminDataContext);
-  const location = useLocation(); // fix: get current path
+  const location = useLocation();
   const hideNavbar = location.pathname === '/login' || location.pathname === '/signup';
 
   if (!adminData) {
@@ -25,7 +25,7 @@ const App = () => {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/admin/add-items' element={<Add />} />
-        <Route path='/admin/lists' element={<Lists />} />
+        <Route path='/admin/list-items' element={<Lists />} />
         <Route path='/admin/orders' element={<Orders />} />
         <Route path='/login' element={<Login />} />
       </Routes>

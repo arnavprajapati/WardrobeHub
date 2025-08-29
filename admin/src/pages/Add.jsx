@@ -15,6 +15,7 @@ function Add() {
     const [subDescription, setSubDescription] = useState("");
     const [category, setCategory] = useState("Men");
     const [price, setPrice] = useState("");
+    const [stock, setStock] = useState("");
     const [subCategory, setSubCategory] = useState("TopWear");
     const [bestseller, setBestSeller] = useState(false);
     const [sizes, setSizes] = useState([]);
@@ -31,6 +32,7 @@ function Add() {
                 description,
                 subDescription,
                 price,
+                stock,
                 category,
                 subCategory,
                 bestseller,
@@ -67,6 +69,7 @@ function Add() {
                 setImage3(false);
                 setImage4(false);
                 setPrice("");
+                setStock("");
                 setBestSeller(false);
                 setCategory("Men");
                 setSubCategory("TopWear");
@@ -184,7 +187,7 @@ function Add() {
                         </div>
                     </div>
 
-                    <div className="flex flex-col gap-1">
+                    {/* <div className="flex flex-col gap-1">
                         <label className="text-base font-semibold">Product Price</label>
                         <input
                             type="number"
@@ -194,6 +197,30 @@ function Add() {
                             value={price}
                             required
                         />
+                    </div> */}
+                    <div className="flex flex-col sm:flex-row gap-40">
+                        <div className="flex flex-col gap-1">
+                            <label className="text-base font-semibold">Product Price</label>
+                            <input
+                                type="number"
+                                placeholder="₹ 2000"
+                                className="w-full max-w-sm p-2 border-2 border-gray-300 rounded-lg focus:border-blue-400 focus:outline-none bg-white"
+                                onChange={(e) => setPrice(e.target.value)}
+                                value={price}
+                                required
+                            />
+                        </div>
+                        <div className="flex flex-col gap-1">
+                            <label className="text-base font-semibold">Stock</label>
+                            <input
+                                type="number"
+                                placeholder="Stock"
+                                className="w-full max-w-sm p-2 border-2 border-gray-300 rounded-lg focus:border-blue-400 focus:outline-none bg-white"
+                                onChange={(e) => setStock(e.target.value)}
+                                value={stock}
+                                required
+                            />
+                        </div>
                     </div>
 
                     <div className="flex flex-col gap-1">
@@ -202,11 +229,10 @@ function Add() {
                             {['S', 'M', 'L', 'XL', 'XXL'].map((size) => (
                                 <div
                                     key={size}
-                                    className={`px-3 py-1 rounded-lg border-2 border-gray-300 cursor-pointer transition ${
-                                        sizes.includes(size)
+                                    className={`px-3 py-1 rounded-lg border-2 border-gray-300 cursor-pointer transition ${sizes.includes(size)
                                             ? 'bg-green-400 text-black border-blue-400'
                                             : 'bg-white text-gray-800 hover:border-blue-400'
-                                    }`}
+                                        }`}
                                     onClick={() =>
                                         setSizes((prev) =>
                                             prev.includes(size)

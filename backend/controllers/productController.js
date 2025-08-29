@@ -4,7 +4,7 @@ import Product from "../models/productsModel.js"
 
 const addProduct = async (req, res) => {
     try {
-        let { name, description, subDescription, price, category, subCategory, sizes, bestseller } = req.body
+        let { name, description, subDescription, price, stock, category, subCategory, sizes, bestseller } = req.body
 
         let image1 = await uploadOnCloudinary(req.files.image1[0].path)
         let image2 = await uploadOnCloudinary(req.files.image2[0].path)
@@ -16,6 +16,7 @@ const addProduct = async (req, res) => {
             description,
             subDescription,
             price: Number(price),
+            stock: Number(stock),
             category,
             subCategory,
             sizes: JSON.parse(sizes),
@@ -39,4 +40,25 @@ const addProduct = async (req, res) => {
 
 }
 
-export default addProduct
+const getProducts = async (req, res) => {
+    try {
+        const products = await Product.find()
+        return res.status(200).json(products)
+    } catch (error) {
+        console.log("getProducts error")
+        return res.status(500).json({ message: `getProducts error ${error}` })
+    }
+}
+
+const deleteProduct = async (req, res) => {
+    try {
+        const { id } = req.params
+        const product = await Product.findByIdAndDelete(id)
+        return res.status(200).json(product)
+    } catch (error) {
+        console.log("deleteProduct error")
+        return res.status(500).json({ message: `deleteProduct error ${error}` })
+    }
+}
+
+export {addProduct, getProducts, deleteProduct}
