@@ -42,8 +42,8 @@ const Navbar = () => {
     };
 
     return (
-        <nav className="bg-white shadow-sm fixed top-0 left-0 w-full z-50">
-            <div className="max-w-7xl mx-auto flex justify-between items-center px-4 py-3 sm:px-6 lg:px-8">
+        <nav className="bg-white shadow-sm fixed top-0 left-0 w-full z-50 h-18">
+            <div className="max-w-7xl mx-auto flex justify-between items-center px-4 py-5 sm:px-6 md:py-4 lg:px-8">
                 <Link to="/" className="text-2xl font-extrabold text-black sm:text-3xl">
                     ShopTrack
                 </Link>
