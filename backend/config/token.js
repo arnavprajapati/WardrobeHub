@@ -15,4 +15,14 @@ const generateAuthToken = (userId) => {
     }
 }
 
-export default generateAuthToken
+const genToken1 = async (email) => {
+    try {
+        let token = await jwt.sign({ email }, process.env.JWT_TOKEN, { expiresIn: "7d" })
+        return token
+    } catch (error) {
+        console.log("token error")
+    }
+}
+
+
+export { generateAuthToken, genToken1 }
