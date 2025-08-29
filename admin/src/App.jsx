@@ -1,29 +1,36 @@
-import React, { useContext } from 'react'
-import { Routes, Route } from 'react-router-dom'
-import Home from './pages/Home.jsx'
-import Add from './pages/Add.jsx'
-import Lists from './pages/Lists.jsx'
-import Orders from './pages/Orders.jsx'
-import Login from './pages/Login.jsx'
-import { adminDataContext } from './context/AdminContext.jsx'
-import { ToastContainer, toast } from 'react-toastify';
+import React, { useContext } from 'react';
+import { Routes, Route, useLocation } from 'react-router-dom';
+import Home from './pages/Home.jsx';
+import Add from './pages/Add.jsx';
+import Lists from './pages/Lists.jsx';
+import Orders from './pages/Orders.jsx';
+import Login from './pages/Login.jsx';
+import { adminDataContext } from './context/AdminContext.jsx';
+import { ToastContainer } from 'react-toastify';
+import AdminNavbar from './components/AdminNavbar.jsx';
 
 const App = () => {
-  let {adminData} = useContext(adminDataContext)
+  const { adminData } = useContext(adminDataContext);
+  const location = useLocation(); // fix: get current path
+  const hideNavbar = location.pathname === '/login' || location.pathname === '/signup';
+
+  if (!adminData) {
+    return <Login />;
+  }
+
   return (
     <>
       <ToastContainer />
-      {!adminData ? <Login /> : <>
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/add' element={<Add />} />
-          <Route path='/lists' element={<Lists />} />
-          <Route path='/orders' element={<Orders />} />
-          <Route path='/login' element={<Login />} />
-        </Routes>
-      </> }
+      {!hideNavbar && <AdminNavbar />}
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/admin/add-items' element={<Add />} />
+        <Route path='/admin/lists' element={<Lists />} />
+        <Route path='/admin/orders' element={<Orders />} />
+        <Route path='/login' element={<Login />} />
+      </Routes>
     </>
-  )
-}
+  );
+};
 
-      export default App
+export default App;
