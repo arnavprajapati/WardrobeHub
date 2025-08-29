@@ -1,12 +1,13 @@
-import React, { use, useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaEnvelope, FaRegEye, FaRegEyeSlash, FaGoogle, FaLock } from "react-icons/fa";
 import axios from "axios";
 import { toast } from "react-toastify";
 import ClipLoader from "react-spinners/ClipLoader";
 import { authDataContext } from "../context/AuthContext.jsx";
-import { signInWithPopup } from "firebase/auth";
+import { userDataContext } from "../context/UserContext.jsx";
 import { auth, provider } from "../utils/Firebase.js";
+import { signInWithPopup } from "firebase/auth";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -18,11 +19,18 @@ const LoginPage = () => {
   });
 
   const { serverURL } = useContext(authDataContext);
+  const { userData, getCurrentUser } = useContext(userDataContext);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
+
+  useEffect(() => {
+    if (userData && userData._id) {
+      navigate("/");
+    }
+  }, [userData, navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -31,7 +39,7 @@ const LoginPage = () => {
       const result = await axios.post(serverURL + "/api/auth/login", formData, {
         withCredentials: true,
       });
-      console.log(result.data);
+      await getCurrentUser(); 
       toast.success("Login Successful 🎉");
       navigate("/");
     } catch (error) {
@@ -43,23 +51,27 @@ const LoginPage = () => {
   };
 
   const googleLogin = async () => {
+    setLoading(true);
     try {
-      const response = await signInWithPopup(auth, provider)
-      // console.log(response);
-      let user = response.user;
-      let name = user.displayName;
-      let email = user.email;
+      const response = await signInWithPopup(auth, provider);
+      const user = response.user;
+      const name = user.displayName;
+      const email = user.email;
 
-      const result = await axios.post(serverURL + "/api/auth/google-login", { name, email }, {
+      await axios.post(serverURL + "/api/auth/google-login", { name, email }, {
         withCredentials: true,
       });
-      console.log(result.data);
+
+      await getCurrentUser(); // update global user data
+      toast.success("Login Successful 🎉");
       navigate("/");
-      toast.success("Sign Up Successful 🎉");
     } catch (error) {
       console.log(error);
+      toast.error("Google login failed");
+    } finally {
+      setLoading(false);
     }
-  }
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
@@ -67,9 +79,7 @@ const LoginPage = () => {
 
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-gray-900">Welcome Back 👋</h1>
-          <p className="text-gray-500 mt-2 text-sm">
-            Continue shopping with your account
-          </p>
+          <p className="text-gray-500 mt-2 text-sm">Continue shopping with your account</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-5">
@@ -119,7 +129,10 @@ const LoginPage = () => {
           <div className="flex-1 border-t border-gray-300"></div>
         </div>
 
-        <button className="w-full flex items-center justify-center gap-2 border border-gray-300 py-3 rounded-lg hover:bg-gray-100 transition" onClick={() => { googleLogin() }}>
+        <button
+          className="w-full flex items-center justify-center gap-2 border border-gray-300 py-3 rounded-lg hover:bg-gray-100 transition"
+          onClick={googleLogin}
+        >
           <FaGoogle className="text-red-500" />
           <span>Log in with Google</span>
         </button>
