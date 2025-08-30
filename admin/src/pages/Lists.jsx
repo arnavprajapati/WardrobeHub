@@ -98,13 +98,14 @@ function Lists() {
                             <thead className="bg-gray-50 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider sticky top-0 z-10">
                                 <tr>
                                     <th className="px-4 py-3 w-10">
-                                        {/* <input type="checkbox" className="w-4 h-4 cursor-pointer" /> */}
+                                        {/* Checkbox header */}
                                     </th>
                                     <th className="px-8 py-3">Product</th>
-                                    <th className="px-4 py-3">Category</th>
-                                    <th className="px-4 py-3">Subcategory</th>
-                                    <th className="px-4 py-3">Price</th>
-                                    <th className="px-4 py-3">Stock</th>
+                                    {/* Hide these columns on mobile */}
+                                    <th className="px-4 py-3 hidden sm:table-cell">Category</th>
+                                    <th className="px-4 py-3 hidden sm:table-cell">Subcategory</th>
+                                    <th className="px-4 py-3 hidden sm:table-cell">Price</th>
+                                    <th className="px-4 py-3 hidden sm:table-cell">Stock</th>
                                     <th className="px-4 py-3">Action</th>
                                 </tr>
                             </thead>
@@ -146,10 +147,11 @@ function Lists() {
                                                 />
                                                 <span className="font-medium">{product.name}</span>
                                             </td>
-                                            <td className="px-4 py-3 text-sm">{product.category}</td>
-                                            <td className="px-4 py-3 text-sm">{product.subCategory}</td>
-                                            <td className="px-4 py-3 text-sm font-medium">₹{product.price.toLocaleString()}</td>
-                                            <td className="px-4 py-3">{getStockBadge(product.stock)}</td>
+                                            {/* Hide these columns on mobile */}
+                                            <td className="px-4 py-3 text-sm hidden sm:table-cell">{product.category}</td>
+                                            <td className="px-4 py-3 text-sm hidden sm:table-cell">{product.subCategory}</td>
+                                            <td className="px-4 py-3 text-sm font-medium hidden sm:table-cell">₹{product.price.toLocaleString()}</td>
+                                            <td className="px-4 py-3 hidden sm:table-cell">{getStockBadge(product.stock)}</td>
                                             <td className="px-4 py-3">
                                                 {selectedForDelete === product._id ? (
                                                     <button
@@ -195,7 +197,7 @@ function Lists() {
                             />
                         </div>
 
-                        <div className="p-6 pt-0">
+                        <div className="p-6 pt-3">
                             <h2 className="text-xl font-bold text-gray-900 mb-2">{selectedProduct.name}</h2>
                             <p className="text-gray-600 text-base mb-4">{selectedProduct.description}</p>
                             <p className="text-gray-500 text-sm mb-4"><strong>Material:</strong> {selectedProduct.subDescription}</p>
