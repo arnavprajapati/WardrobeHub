@@ -53,6 +53,7 @@ const Navbar = () => {
                 <div className="hidden md:flex space-x-6 font-medium text-gray-800">
                     <Link to="/" className="hover:text-black">Home</Link>
                     <Link to="/collection" className="hover:text-black">Collection</Link>
+                    <Link to="/order" className="hover:text-black">Track Orders</Link>
                     <Link to="/about" className="hover:text-black">About</Link>
                     <Link to="/contact" className="hover:text-black">Contact</Link>
                 </div>
@@ -138,13 +139,13 @@ const Navbar = () => {
                         {isMobileMenuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
                     </button>
 
-                    <button
+                    {/* <button
                         className="md:hidden text-gray-700 hover:text-black focus:outline-none"
                         onClick={toggleSearch}
                         aria-label="Toggle search"
                     >
                         <FaSearch size={20} />
-                    </button>
+                    </button> */}
                 </div>
             </div>
 
@@ -164,6 +165,13 @@ const Navbar = () => {
                             onClick={toggleMobileMenu}
                         >
                             Collection
+                        </Link>
+                        <Link
+                            to="/order"
+                            className="text-gray-800 font-medium hover:text-black"
+                            onClick={toggleMobileMenu}
+                        >
+                            Track Orders
                         </Link>
                         <Link
                             to="/about"
