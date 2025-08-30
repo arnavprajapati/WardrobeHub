@@ -11,6 +11,7 @@ import Contact from './pages/Contact.jsx';
 import Product from './pages/Product.jsx';
 import ProtectedRoute from './utils/ProtectedRoutes.jsx';
 import ProductDetail from './pages/ProductDetail.jsx';
+import Cart from './pages/Cart.jsx';
 
 const App = () => {
   const location = useLocation();
@@ -76,6 +77,14 @@ const App = () => {
           element={
             <ProtectedRoute>
               <ProductDetail />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path='/cart'
+          element={
+            <ProtectedRoute>
+              <Cart />
             </ProtectedRoute>
           }
         />

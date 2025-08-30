@@ -4,6 +4,7 @@ import { FaSearch, FaUser, FaHeart, FaShoppingBag, FaBars, FaTimes } from "react
 import { userDataContext } from "../context/UserContext.jsx";
 import { authDataContext } from "../context/authContext.jsx";
 import axios from "axios";
+import { ShopDataContext } from "../context/ShopContext.jsx";
 
 const Navbar = () => {
     const { userData, setUserData } = useContext(userDataContext);
@@ -12,6 +13,7 @@ const Navbar = () => {
     const [isProfileOpen, setIsProfileOpen] = useState(false);
     const { serverURL } = useContext(authDataContext);
     const navigate = useNavigate();
+    const { getCartCount } = useContext(ShopDataContext)
 
     const toggleMobileMenu = () => {
         setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -121,10 +123,10 @@ const Navbar = () => {
 
                     <FaHeart className="text-gray-700 cursor-pointer hover:text-black" size={20} />
 
-                    <div className="relative cursor-pointer">
+                    <div className="relative cursor-pointer" onClick={() => navigate("/cart")}>
                         <FaShoppingBag className="text-gray-700 hover:text-black" size={20} />
-                        <span className="absolute -top-2 -right-2 bg-black text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
-                            0
+                        <span className="absolute -top-2 -right-2 bg-black text-white text-xs w-5 h-5 flex items-center justify-center rounded-full" >
+                            {getCartCount()}
                         </span>
                     </div>
 

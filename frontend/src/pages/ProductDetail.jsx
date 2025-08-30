@@ -4,7 +4,7 @@ import { ShopDataContext } from "../context/ShopContext.jsx";
 import ClipLoader from "react-spinners/ClipLoader";
 
 const ProductDetail = () => {
-    const { products, addtoCart, loading } = useContext(ShopDataContext);
+    const { products, addCart, loading } = useContext(ShopDataContext);
     const { id: productId } = useParams();
     const navigate = useNavigate();
 
@@ -26,7 +26,7 @@ const ProductDetail = () => {
     if (loading || !productData) {
         return (
             <div className="flex items-center justify-center min-h-screen bg-gray-50">
-                <ClipLoader color="#f97316" size={40} />
+                <ClipLoader color="#000000" size={40} />
             </div>
         );
     }
@@ -40,10 +40,10 @@ const ProductDetail = () => {
 
     return (
         <div className="relative lg:top-[70px] top-[360px] w-full flex items-center justify-center h-[calc(100vh-70px)] py-4 px-4 sm:px-6 lg:px-8">
-            <div className="bg-white rounded-2xl overflow-hidden max-w-7xl w-full p-6 md:p-10">
+            <div className="bg-white rounded-2xl overflow-hidden max-w-7xl w-full p-6 md:p-10 border border-gray-200 shadow-md">
                 <div className="flex flex-col md:flex-row gap-8 lg:gap-12 items-start">
                     <div className="flex flex-col space-y-4 md:w-1/2">
-                        <div className="w-full h-[400px] lg:h-[450px] rounded-lg overflow-hidden border flex items-center justify-center">
+                        <div className="w-full h-[400px] lg:h-[450px] rounded-lg overflow-hidden border flex items-center justify-center border-gray-300">
                             {image ? (
                                 <img
                                     src={image}
@@ -61,8 +61,8 @@ const ProductDetail = () => {
                                     onClick={() => setImage(imgUrl)}
                                     className={`w-20 h-20 rounded-lg overflow-hidden border-2 flex-shrink-0 transition-all duration-200 ${
                                         image === imgUrl
-                                            ? 'border-orange-500 ring-2 ring-orange-500'
-                                            : 'border-gray-200 hover:border-orange-300'
+                                            ? 'border-black ring-2 ring-gray-800'
+                                            : 'border-gray-200 hover:border-gray-500'
                                     }`}
                                 >
                                     <img src={imgUrl} alt={`thumbnail ${index + 1}`} className="w-full h-full object-cover cursor-pointer" />
@@ -76,7 +76,7 @@ const ProductDetail = () => {
                             {productData.subDescription || 'Soft Cotton Regular Fit'}
                         </p>
 
-                        <h1 className="text-3xl md:text-4xl text-gray-900 leading-tight">
+                        <h1 className="text-3xl md:text-4xl text-black leading-tight">
                             {productData.name}
                         </h1>
 
@@ -85,7 +85,7 @@ const ProductDetail = () => {
                         </p>
 
                         <div className="border-t border-gray-200 pt-4">
-                            <h2 className="text-lg text-gray-900 mb-2">Product Details</h2>
+                            <h2 className="text-lg text-black mb-2">Product Details</h2>
                             <div className="max-h-[150px] overflow-y-auto pr-2 custom-scrollbar">
                                 <p className="text-sm text-gray-600 leading-relaxed">
                                     {productData.description || "A timeless white tee made from 100% cotton, perfect for casual and everyday wear."}
@@ -101,7 +101,7 @@ const ProductDetail = () => {
                                         key={index}
                                         className={`w-14 h-14 rounded-full text-sm transition-all duration-200 ${
                                             item === size
-                                                ? 'bg-orange-500 text-white border-2 border-orange-600 shadow-md'
+                                                ? 'bg-gray-800 text-white border-2 border-black shadow-md'
                                                 : 'bg-gray-100 text-gray-700 border border-gray-300 hover:bg-gray-200'
                                         }`}
                                         onClick={() => setSize(item)}
@@ -113,9 +113,9 @@ const ProductDetail = () => {
                         </div>
 
                         <button
-                            onClick={() => addtoCart(productData._id, size)}
+                            onClick={() => addCart(productData._id, size)}
                             disabled={loading || !size}
-                            className="bg-orange-600 hover:bg-orange-700 disabled:bg-orange-400 text-white py-3 px-8 rounded-lg shadow-md w-full mt-6 transition-colors duration-200 flex items-center justify-center"
+                            className="bg-gray-800 hover:bg-black disabled:bg-gray-500 text-white py-3 px-8 rounded-lg shadow-md w-full mt-6 transition-colors duration-200 flex items-center justify-center"
                         >
                             {loading ? <ClipLoader size={16} color="white" /> : 'Add to Cart'}
                         </button>

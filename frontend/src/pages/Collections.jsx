@@ -63,8 +63,8 @@ const Collections = () => {
     };
 
     const FilterContent = () => (
-        <div className="bg-white p-5 rounded-xl shadow-lg w-full max-w-md border border-gray-100 flex flex-col items-center">
-            <h2 className="text-xl font-bold text-gray-800 mb-5 text-center">Filters</h2>
+        <div className="bg-white p-5 rounded-xl shadow-lg w-full max-w-md border border-gray-200 flex flex-col items-center">
+            <h2 className="text-xl font-bold text-black mb-5 text-center">Filters</h2>
             <div className="w-full space-y-6">
                 <div>
                     <h3 className="text-sm font-semibold text-gray-700 uppercase tracking-wide mb-3 text-center">
@@ -72,16 +72,19 @@ const Collections = () => {
                     </h3>
                     <div className="space-y-2 max-h-40 overflow-y-auto px-2">
                         {categories.map((cat) => (
-                            <div key={cat} className="flex items-center justify-start hover:bg-gray-50 rounded px-3 py-1 transition">
+                            <div
+                                key={cat}
+                                className="flex items-center justify-start hover:bg-gray-100 rounded px-3 py-1 transition"
+                            >
                                 <input
                                     type="checkbox"
                                     id={`cat-${cat}`}
                                     value={cat}
                                     checked={category.includes(cat)}
                                     onChange={toggleCategory}
-                                    className="h-4 w-4 text-blue-600 focus:ring-blue-500 rounded border-gray-300"
+                                    className="h-4 w-4 text-black focus:ring-gray-600 rounded border-gray-400"
                                 />
-                                <label htmlFor={`cat-${cat}`} className="ml-3 text-sm font-medium text-gray-700">
+                                <label htmlFor={`cat-${cat}`} className="ml-3 text-sm font-medium text-gray-800">
                                     {cat}
                                 </label>
                             </div>
@@ -94,16 +97,19 @@ const Collections = () => {
                     </h3>
                     <div className="space-y-2 max-h-40 overflow-y-auto px-2">
                         {subCategories.map((subCat) => (
-                            <div key={subCat} className="flex items-center justify-start hover:bg-gray-50 rounded px-3 py-1 transition">
+                            <div
+                                key={subCat}
+                                className="flex items-center justify-start hover:bg-gray-100 rounded px-3 py-1 transition"
+                            >
                                 <input
                                     type="checkbox"
                                     id={`subcat-${subCat}`}
                                     value={subCat}
                                     checked={subCategory.includes(subCat)}
                                     onChange={toggleSubCategory}
-                                    className="h-4 w-4 text-blue-600 focus:ring-blue-500 rounded border-gray-300"
+                                    className="h-4 w-4 text-black focus:ring-gray-600 rounded border-gray-400"
                                 />
-                                <label htmlFor={`subcat-${subCat}`} className="ml-3 text-sm font-medium text-gray-700">
+                                <label htmlFor={`subcat-${subCat}`} className="ml-3 text-sm font-medium text-gray-800">
                                     {subCat}
                                 </label>
                             </div>
@@ -114,7 +120,7 @@ const Collections = () => {
             {hasFilters && (
                 <button
                     onClick={clearAllFilters}
-                    className="mt-6 w-full py-2 text-sm font-medium text-red-600 hover:text-red-800 hover:bg-red-50 rounded-lg transition-colors duration-200 ease-in-out text-center"
+                    className="mt-6 w-full py-2 text-sm font-medium text-gray-700 hover:text-black hover:bg-gray-100 rounded-lg transition-colors"
                 >
                     Clear All Filters
                 </button>
@@ -127,14 +133,15 @@ const Collections = () => {
             <select
                 value={sortType}
                 onChange={(e) => setSortType(e.target.value)}
-                className="bg-white w-full md:w-[250px] h-[50px] px-[15px] text-gray-800 rounded-lg hover:border-[#46d1f7] border-[2px] text-center focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="bg-white w-full md:w-[250px] h-[50px] px-[15px] text-gray-800 rounded-lg border-2 border-gray-300 text-center focus:outline-none focus:ring-2 focus:ring-black"
             >
-                <option value="relavent">Sort By: Relavent</option>
+                <option value="relavent">Sort By: Relevant</option>
                 <option value="low-high">Sort By: Low to High</option>
                 <option value="high-low">Sort By: High to Low</option>
             </select>
         </div>
     );
+
 
     return (
         <div className="collections-page mt-20 px-4 pb-16">
@@ -148,7 +155,7 @@ const Collections = () => {
                 <div className="flex-1 lg:ml-80">
                     <div className="flex flex-col lg:flex-row justify-between items-center mb-6 px-4 lg:px-0">
                         <div className="text-center lg:text-left">
-                            <h1 className="text-2xl font-bold">Explore Products</h1>
+                            <h1 className="text-2xl">Explore Products</h1>
                             <p className="text-sm text-gray-500">Upgrade your wardrobe with our new arrivals</p>
                         </div>
                         <div className="mt-4 lg:mt-0 flex-col lg:flex-row gap-4 items-center w-full lg:w-auto hidden lg:flex">
@@ -183,13 +190,13 @@ const Collections = () => {
                     <div className="lg:hidden fixed bottom-0 left-0 w-full bg-white p-4 shadow-lg flex justify-center items-center gap-6 z-10">
                         <button
                             onClick={() => setShowSortMenu(true)}
-                            className="w-1/2 text-gray-700 font-medium flex items-center justify-center py-2 border border-gray-300 rounded-lg"
+                            className="w-1/2 text-gray-700 flex items-center justify-center py-2 border border-gray-300 rounded-lg"
                         >
                             ↑ Sort By
                         </button>
                         <button
                             onClick={() => setShowFilterMenu(true)}
-                            className="w-1/2 text-gray-700 font-medium flex items-center justify-center py-2 border border-gray-300 rounded-lg"
+                            className="w-1/2 text-gray-700 flex items-center justify-center py-2 border border-gray-300 rounded-lg"
                         >
                             Filter
                             {hasFilters && <span className="ml-1 w-2 h-2 bg-red-500 rounded-full inline-block"></span>}

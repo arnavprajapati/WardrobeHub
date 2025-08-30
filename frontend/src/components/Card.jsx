@@ -19,14 +19,14 @@ const Card = ({ product }) => {
                     </div>
                 )}
 
-                <button
+                {/* <button
                     className="absolute top-3 right-3 bg-gray-800 bg-opacity-90 w-10 h-10 rounded-full flex items-center justify-center z-10"
                     onClick={toggleFavorite}
                 >
                     <span className={`text-2xl ${isFavorite ? 'text-red-500' : 'text-white'}`}>
                         ♥
                     </span>
-                </button>
+                </button> */}
 
                 <img
                     src={product.image1}
@@ -47,7 +47,7 @@ const Card = ({ product }) => {
                         ${product.price.toLocaleString()}
                     </div>
                     <button className="flex items-center gap-1 bg-gray-800 hover:bg-gray-700 text-white text-xs px-3 py-1.5 rounded-md transition cursor-pointer">
-                        <span>🛒</span>
+                        <span>❤️</span>
                         <span>Add</span>
                     </button>
                 </div>
