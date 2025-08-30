@@ -51,8 +51,9 @@ const AdminNavbar = () => {
                             className="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center rounded-full bg-gray-200 cursor-pointer hover:bg-gray-300"
                             onClick={toggleProfile}
                         >
-
-                            <FaUser className="text-gray-600" />
+                            <span className="font-semibold text-gray-800">
+                                    A
+                            </span>
                         </div>
 
                         {isProfileOpen && (
