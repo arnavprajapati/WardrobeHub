@@ -2,11 +2,11 @@ import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaSearch, FaUser, FaHeart, FaShoppingBag, FaBars, FaTimes } from "react-icons/fa";
 import { userDataContext } from "../context/UserContext.jsx";
-import { authDataContext } from "../context/AuthContext.jsx";
+import { authDataContext } from "../context/authContext.jsx";
 import axios from "axios";
 
 const Navbar = () => {
-    const { userData, setUserData } = useContext(userDataContext); 
+    const { userData, setUserData } = useContext(userDataContext);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isSearchOpen, setIsSearchOpen] = useState(false);
     const [isProfileOpen, setIsProfileOpen] = useState(false);
@@ -44,8 +44,8 @@ const Navbar = () => {
     return (
         <nav className="bg-white shadow-sm fixed top-0 left-0 w-full z-50 h-18">
             <div className="max-w-7xl mx-auto flex justify-between items-center px-4 py-5 sm:px-6 md:py-4 lg:px-8">
-                <Link to="/" className="text-2xl font-extrabold text-black sm:text-3xl">
-                    ShopTrack
+                <Link to="/" className="text-2xl md:-ml-15 font-extrabold text-black sm:text-3xl">
+                    ShopCart
                 </Link>
 
                 <div className="hidden md:flex space-x-6 font-medium text-gray-800">
@@ -56,14 +56,14 @@ const Navbar = () => {
                 </div>
 
                 <div className="flex items-center space-x-4 sm:space-x-6">
-                    <div className="hidden md:flex items-center bg-gray-100 rounded-md px-3 py-1 w-32 sm:w-40 md:w-56">
+                    {/* <div className="hidden md:flex items-center bg-gray-100 rounded-md px-3 py-1 w-32 sm:w-40 md:w-56">
                         <FaSearch className="text-gray-500" />
                         <input
                             type="text"
                             placeholder="Search products"
                             className="bg-gray-100 outline-none ml-2 text-sm w-full"
                         />
-                    </div>
+                    </div> */}
 
                     <div className="relative">
                         <div
