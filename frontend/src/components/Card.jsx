@@ -1,15 +1,17 @@
 // src/components/Card.jsx
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Card = ({ product }) => {
     const [isFavorite, setIsFavorite] = useState(false);
+    const navigate = useNavigate();
 
     const toggleFavorite = () => {
         setIsFavorite(!isFavorite);
     };
 
     return (
-        <div className="product-card w-72 bg-white rounded-xl overflow-hidden shadow-md font-sans">
+        <div className="product-card w-72 bg-white rounded-xl overflow-hidden shadow-md font-sans cursor-pointer">
             <div className="relative">
                 {product.bestseller && (
                     <div className="absolute top-3 left-3 bg-green-500 text-white text-xs font-bold px-2 py-1 rounded-md z-10">
@@ -30,6 +32,7 @@ const Card = ({ product }) => {
                     src={product.image1}
                     alt={product.name}
                     className="w-full h-64 object-cover"
+                    onClick={() => navigate(`/productdetail/${product._id}`)}
                 />
             </div>
 
@@ -43,7 +46,7 @@ const Card = ({ product }) => {
                     <div className="price text-lg font-bold text-gray-900">
                         ${product.price.toLocaleString()}
                     </div>
-                    <button className="flex items-center gap-1 bg-gray-800 hover:bg-gray-700 text-white text-xs px-3 py-1.5 rounded-md transition">
+                    <button className="flex items-center gap-1 bg-gray-800 hover:bg-gray-700 text-white text-xs px-3 py-1.5 rounded-md transition cursor-pointer">
                         <span>🛒</span>
                         <span>Add</span>
                     </button>

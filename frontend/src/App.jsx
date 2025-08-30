@@ -9,7 +9,8 @@ import About from './pages/About.jsx';
 import Collections from './pages/Collections.jsx';
 import Contact from './pages/Contact.jsx';
 import Product from './pages/Product.jsx';
-import ProtectedRoute from './utils/ProtectedRoutes.jsx'; 
+import ProtectedRoute from './utils/ProtectedRoutes.jsx';
+import ProductDetail from './pages/ProductDetail.jsx';
 
 const App = () => {
   const location = useLocation();
@@ -70,8 +71,15 @@ const App = () => {
             </ProtectedRoute>
           }
         />
+        <Route
+          path='/productdetail/:id'
+          element={
+            <ProtectedRoute>
+              <ProductDetail />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
-
     </>
   );
 }
