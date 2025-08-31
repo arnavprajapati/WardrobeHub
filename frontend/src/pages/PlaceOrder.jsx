@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ShopDataContext } from '../context/ShopContext.jsx';
-import { authDataContext } from '../context/authContext.jsx';
+import { authDataContext } from '../context/AuthContext.jsx';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import ClipLoader from 'react-spinners/ClipLoader';

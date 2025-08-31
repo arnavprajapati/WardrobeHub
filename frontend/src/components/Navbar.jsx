@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaSearch, FaUser, FaHeart, FaShoppingBag, FaBars, FaTimes } from "react-icons/fa";
 import { userDataContext } from "../context/UserContext.jsx";
-import { authDataContext } from "../context/authContext.jsx";
+import { authDataContext } from "../context/AuthContext.jsx";
 import axios from "axios";
 import { ShopDataContext } from "../context/ShopContext.jsx";
 

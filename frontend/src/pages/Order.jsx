@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { ShopDataContext } from '../context/ShopContext.jsx';
-import { authDataContext } from '../context/authContext.jsx';
+import { authDataContext } from '../context/AuthContext.jsx';
 import axios from 'axios';
 import ClipLoader from 'react-spinners/ClipLoader';
 import { toast } from 'react-toastify';
