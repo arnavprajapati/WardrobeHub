@@ -2,7 +2,7 @@ import React from 'react'
 import { createContext } from 'react'
 export const authDataContext = createContext()
 function AuthContext({ children }) {
-    let serverURL = process.env.VITE_SERVER_URL
+    const serverURL = import.meta.env.VITE_SERVER_URL;
 
     let value = {
         serverURL

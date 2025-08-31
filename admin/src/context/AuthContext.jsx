@@ -3,7 +3,7 @@ import React, { createContext } from 'react';
 export const authDataContext = createContext();
 
 function AuthContext({ children }) {
-    const serverURL = process.env.VITE_SERVER_URL;
+    const serverURL = import.meta.env.VITE_SERVER_URL;
 
     const value = {
         serverURL
