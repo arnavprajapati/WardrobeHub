@@ -43,7 +43,7 @@ const LoginPage = () => {
       toast.success("Login Successful 🎉");
       navigate("/");
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       toast.error(error?.response?.data?.message || "Login failed");
     } finally {
       setLoading(false);
@@ -66,7 +66,7 @@ const LoginPage = () => {
       toast.success("Login Successful 🎉");
       navigate("/");
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       toast.error("Google login failed");
     } finally {
       setLoading(false);

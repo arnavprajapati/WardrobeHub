@@ -19,17 +19,17 @@ function ShopContext({ children }) {
     const getProducts = async () => {
         try {
             const response = await axios.get(`${serverURL}/api/product/getproducts`, { withCredentials: true });
-            console.log(response.data);
+            //console.log(response.data);
             setProducts(response.data);
         } catch (error) {
-            console.log("fetchProducts error", error);
+            //console.log("fetchProducts error", error);
             toast.error("Failed to fetch products");
         }
     };
 
     const addCart = async (itemId, size) => {
         if (!size) {
-            console.log("Select Product Size");
+            //console.log("Select Product Size");
             return;
         }
         let cartData = structuredClone(cartItem)
@@ -48,12 +48,12 @@ function ShopContext({ children }) {
             setLoading(true)
             try {
                 let result = await axios.post(serverURL + "/api/cart/add", { itemId, size }, { withCredentials: true })
-                console.log(result.data)
+                //console.log(result.data)
                 toast.success("Product Added")
                 setLoading(false)
             }
             catch (error) {
-                console.log(error)
+                //console.log(error)
                 setLoading(false)
                 toast.error("Add Cart Error")
             }
@@ -81,7 +81,7 @@ function ShopContext({ children }) {
             const result = await axios.post(serverURL + '/api/cart/get', {}, { withCredentials: true })
             setCartItem(result.data)
         } catch (error) {
-            console.log(error)
+            //console.log(error)
         }
 
     }
@@ -95,7 +95,7 @@ function ShopContext({ children }) {
             try {
                 await axios.post(serverURL + "/api/cart/update", { itemId, size, quantity }, { withCredentials: true })
             } catch (error) {
-                console.log(error)
+                //console.log(error)
             }
         }
     }

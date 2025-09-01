@@ -48,7 +48,7 @@ function Add() {
             });
 
             for (let [key, value] of formData.entries()) {
-                console.log(key, value);
+                // console.log(key, value);
             }
 
             const result = await axios.post(serverURL + "/api/product/addproduct", formData, {
@@ -56,7 +56,7 @@ function Add() {
                 withCredentials: true,
             });
 
-            console.log(result.data);
+            // console.log(result.data);
             toast.success("ADD Product Successfully");
             setLoading(false);
 

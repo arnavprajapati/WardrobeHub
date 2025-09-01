@@ -158,7 +158,7 @@ const Cart = () => {
                                     if (cartData.length > 0) {
                                         navigate('/placeorder');
                                     } else {
-                                        console.log('Your cart is empty!');
+                                        // console.log('Your cart is empty!');
                                     }
                                 }}
                                 className="mt-6 w-full bg-gray-900 text-white py-3 rounded-lg hover:bg-gray-700 transition-colors duration-200"

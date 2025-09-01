@@ -40,12 +40,12 @@ const LoginPage = () => {
                 { email, password },
                 { withCredentials: true }
             );
-            console.log(result.data);
+            // console.log(result.data);
             toast.success("Admin login successful");
             getAdmin();
             navigate("/");
         } catch (error) {
-            console.log(error);
+            // console.log(error);
             toast.error("Admin login failed");
         } finally {
             setLoading(false);

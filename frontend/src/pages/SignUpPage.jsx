@@ -33,11 +33,11 @@ const SignUpPage = () => {
             const result = await axios.post(serverURL + "/api/auth/signup", formData, {
                 withCredentials: true,
             });
-            console.log(result.data);
+            // console.log(result.data);
             navigate("/");
             toast.success("Sign Up Successful 🎉");
         } catch (error) {
-            console.log(error);
+            // console.log(error);
             toast.error(error.response?.data?.message || "Something went wrong");
         } finally {
             setLoading(false);
@@ -55,11 +55,11 @@ const SignUpPage = () => {
             const result = await axios.post(serverURL + "/api/auth/google-login", {name, email}, {
                 withCredentials: true,
             });
-            console.log(result.data);
+            // console.log(result.data);
             navigate("/");
             toast.success("Sign Up Successful 🎉");
         }catch(error){
-            console.log(error);
+            // console.log(error);
         }
     }
 

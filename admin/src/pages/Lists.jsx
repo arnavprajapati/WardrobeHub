@@ -22,7 +22,7 @@ function Lists() {
             const response = await axios.get(`${serverURL}/api/product/getproducts`, { withCredentials: true });
             setProducts(response.data);
         } catch (error) {
-            console.log("fetchProducts error", error);
+            // console.log("fetchProducts error", error);
             toast.error("Failed to fetch products");
         } finally {
             setLoading(false);
@@ -38,7 +38,7 @@ function Lists() {
             setShowModal(false);
             toast.success("Product deleted successfully");
         } catch (error) {
-            console.log("deleteProduct error", error);
+            // console.log("deleteProduct error", error);
             toast.error("Failed to delete product");
         } finally {
             setLoading(false);
