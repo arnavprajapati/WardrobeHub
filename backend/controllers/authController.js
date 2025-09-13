@@ -2,6 +2,17 @@ import { generateAuthToken, genToken1 } from '../config/token.js'
 import User from '../models/usersModel.js'
 import bcrypt from 'bcrypt'
 
+const getCookieOptions = () => {
+    const isProduction = process.env.NODE_ENV === "production";
+
+    return {
+        httpOnly: true,
+        secure: isProduction,
+        sameSite: isProduction ? "None" : "Strict",
+        maxAge: 7 * 24 * 60 * 60 * 1000,
+    };
+};
+
 const signUp = async (req, res) => {
     const { name, email, password } = req.body
     try {
@@ -14,12 +25,7 @@ const signUp = async (req, res) => {
         let user = await User.create({ name, email, password: hashPassword })
 
         const token = await generateAuthToken(user._id)
-        res.cookie("token", token, {
-            httpOnly: true,
-            secure: true,
-            sameSite: "none",
-            maxAge: 7 * 24 * 60 * 60 * 1000
-        })
+        res.cookie("token", token, getCookieOptions())
 
         user = user.toObject()
         delete user.password
@@ -46,12 +52,7 @@ const login = async (req, res) => {
         }
 
         const token = await generateAuthToken(user._id)
-        res.cookie("token", token, {
-            httpOnly: true,
-            secure: true,
-            sameSite: "none",
-            maxAge: 7 * 24 * 60 * 60 * 1000
-        })
+        res.cookie("token", token, getCookieOptions())
 
         user = user.toObject()
         delete user.password
@@ -65,10 +66,10 @@ const login = async (req, res) => {
 
 const logout = async (req, res) => {
     try {
-        res.clearCookie("token", {
-            httpOnly: true,
-            secure: true,
-            sameSite: "none"
+        res.cookie("token", "", {
+            ...getCookieOptions(),
+            maxAge: 0,
+            expires: new Date(0)
         })
         return res.status(200).json({ message: "Logout Successfully" })
     } catch (err) {
@@ -107,12 +108,7 @@ const adminLogin = async (req, res) => {
         let { email, password } = req.body
         if (email === process.env.ADMIN_EMAIL && password === process.env.ADMIN_PASSWORD) {
             let token = await genToken1(email)
-            res.cookie("token", token, {
-                httpOnly: true,
-                secure: true,
-                sameSite: "none",
-                maxAge: 1 * 24 * 60 * 60 * 1000
-            })
+            res.cookie("token", token, getCookieOptions())
             return res.status(200).json(token)
         }
         return res.status(400).json({ message: "Invaild creadintials" })

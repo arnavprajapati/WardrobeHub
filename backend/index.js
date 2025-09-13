@@ -10,15 +10,28 @@ const app = express();
 const PORT = process.env.PORT || 4000;
 const MONGO_URI = process.env.MONGO_URI;
 
-const allowedOrigins = process.env.CLIENT_URL
-    ? process.env.CLIENT_URL.split(",")
-    : ["http://localhost:5173", "http://localhost:5174"];
+// const allowedOrigins = process.env.CLIENT_URL
+//     ? process.env.CLIENT_URL.split(",")
+//     : ["http://localhost:5173", "http://localhost:5174"];
+
+const allowedOrigins = [
+    process.env.CLIENT_URL,
+    'http://localhost:5173',
+    'https://wardrobehub-frontend.onrender.com',
+    'https://wardrobehub-admin.onrender.com'
+];
 
 app.use(cors({
-    origin: allowedOrigins,
+    origin: (origin, callback) => {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error("Not allowed by CORS"));
+        }
+    },
     credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization"],
+    methods: ['POST', 'GET', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
 }));
 app.use(cookieParser());
 app.use(express.json());
