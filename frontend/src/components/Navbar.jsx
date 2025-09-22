@@ -5,6 +5,9 @@ import { userDataContext } from "../context/UserContext.jsx";
 import { authDataContext } from "../context/AuthContext.jsx";
 import axios from "axios";
 import { ShopDataContext } from "../context/ShopContext.jsx";
+import { WishListDataContext } from '../context/WishListContext.jsx';
+import logo from '../assets/logo.png'
+
 
 const Navbar = () => {
     const { userData, setUserData } = useContext(userDataContext);
@@ -14,6 +17,7 @@ const Navbar = () => {
     const { serverURL } = useContext(authDataContext);
     const navigate = useNavigate();
     const { getCartCount } = useContext(ShopDataContext)
+    const { wishlistCount } = useContext(WishListDataContext);
 
     const toggleMobileMenu = () => {
         setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -47,7 +51,7 @@ const Navbar = () => {
         <nav className="bg-white shadow-sm fixed top-0 left-0 w-full z-50 h-18">
             <div className="max-w-7xl mx-auto flex justify-between items-center px-4 py-5 sm:px-6 md:py-4 lg:px-8">
                 <Link to="/" className="text-2xl md:-ml-15 font-extrabold text-black sm:text-3xl">
-                    ShopCart
+                    <img src={logo} alt="Logo" className="h-12 md:h-12" /> 
                 </Link>
 
                 <div className="hidden md:flex space-x-6 font-medium text-gray-800">
@@ -90,15 +94,15 @@ const Navbar = () => {
                                             <p className="text-xs text-gray-500">{userData.email}</p>
                                         </div>
                                         <hr className="border-gray-200" />
-                                        <Link
+                                        {/* <Link
                                             to="/settings"
                                             className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                                             onClick={toggleProfile}
                                         >
                                             Settings
-                                        </Link>
+                                        </Link> */}
                                         <button
-                                            className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                            className="w-full text-left px-4 py-2 cursor-pointer text-sm text-gray-700 hover:bg-gray-100"
                                             onClick={() => {
                                                 toggleProfile();
                                                 handleLogout();
@@ -121,8 +125,12 @@ const Navbar = () => {
                             </div>
                         )}
                     </div>
-
-                    <FaHeart className="text-gray-700 cursor-pointer hover:text-black" size={20} />
+                    <div className="relative cursor-pointer" onClick={() => navigate("/wishlist")}>
+                        <FaHeart className="text-gray-700 cursor-pointer hover:text-black" size={20} />
+                        <span className="absolute -top-2 -right-2 bg-black text-white text-xs w-5 h-5 flex items-center justify-center rounded-full" >
+                            {wishlistCount}
+                        </span>
+                    </div>
 
                     <div className="relative cursor-pointer" onClick={() => navigate("/cart")}>
                         <FaShoppingBag className="text-gray-700 hover:text-black" size={20} />

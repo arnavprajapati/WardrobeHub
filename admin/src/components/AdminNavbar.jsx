@@ -4,6 +4,7 @@ import { FaSearch, FaUser, FaBars, FaTimes } from "react-icons/fa";
 import { authDataContext } from "../context/AuthContext.jsx";
 import { adminDataContext } from "../context/AdminContext.jsx";
 import axios from "axios";
+import logo from '../assets/logo.png'
 
 const AdminNavbar = () => {
     const { adminData, setAdminData } = useContext(adminDataContext);
@@ -35,8 +36,8 @@ const AdminNavbar = () => {
     return (
         <nav className="bg-white shadow-sm fixed top-0 left-0 w-full z-50 h-18">
             <div className="max-w-7xl mx-auto flex justify-between items-center px-4 py-5 sm:px-6 md:py-4 lg:px-8">
-                <Link to="/admin/dashboard" className="text-2xl font-extrabold text-black sm:text-3xl">
-                    AdminPanel
+                <Link to="/admin/dashboard" className="text-2xl md:-ml-15 font-extrabold text-black sm:text-3xl">
+                    <img src={logo} alt="Logo" className="h-12 md:h-12" /> 
                 </Link>
 
                 <div className="hidden md:flex space-x-6 font-medium text-gray-800">

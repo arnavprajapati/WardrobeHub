@@ -225,33 +225,92 @@ const PlaceOrder = () => {
                     <form id='place-order-form' onSubmit={onSubmitHandler} className="flex flex-col gap-6">
                         <h2 className="text-2xl font-bold text-black">Delivery Information</h2>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            {[
-                                { name: 'firstName', placeholder: 'First name', type: 'text' },
-                                { name: 'lastName', placeholder: 'Last name', type: 'text' },
-                                { name: 'email', placeholder: 'Email address', type: 'email', span: true },
-                                { name: 'street', placeholder: 'Street', type: 'text', span: true },
-                                { name: 'city', placeholder: 'City', type: 'text' },
-                                { name: 'state', placeholder: 'State', type: 'text' },
-                                { name: 'pinCode', placeholder: 'Pincode', type: 'text' },
-                                { name: 'country', placeholder: 'Country', type: 'text' },
-                                { name: 'phone', placeholder: 'Phone', type: 'tel', span: true },
-                            ].map((field, i) => (
-                                <input
-                                    key={i}
-                                    type={field.type}
-                                    placeholder={field.placeholder}
-                                    className={`w-full px-4 py-2 border border-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-black ${field.span ? 'md:col-span-2' : ''}`}
-                                    required
-                                    onChange={onChangeHandler}
-                                    name={field.name}
-                                    value={formData[field.name]}
-                                />
-                            ))}
+                            <input
+                                type="text"
+                                placeholder="First name"
+                                className="w-full px-4 py-2 border border-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
+                                required
+                                onChange={onChangeHandler}
+                                name="firstName"
+                                value={formData.firstName}
+                            />
+                            <input
+                                type="text"
+                                placeholder="Last name"
+                                className="w-full px-4 py-2 border border-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
+                                required
+                                onChange={onChangeHandler}
+                                name="lastName"
+                                value={formData.lastName}
+                            />
+                            <input
+                                type="email"
+                                placeholder="Email address"
+                                className="w-full px-4 py-2 border border-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-black md:col-span-2"
+                                required
+                                onChange={onChangeHandler}
+                                name="email"
+                                value={formData.email}
+                            />
+                            <input
+                                type="text"
+                                placeholder="Street"
+                                className="w-full px-4 py-2 border border-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-black md:col-span-2"
+                                required
+                                onChange={onChangeHandler}
+                                name="street"
+                                value={formData.street}
+                            />
+                            <input
+                                type="text"
+                                placeholder="City"
+                                className="w-full px-4 py-2 border border-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
+                                required
+                                onChange={onChangeHandler}
+                                name="city"
+                                value={formData.city}
+                            />
+                            <input
+                                type="text"
+                                placeholder="State"
+                                className="w-full px-4 py-2 border border-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
+                                required
+                                onChange={onChangeHandler}
+                                name="state"
+                                value={formData.state}
+                            />
+                            <input
+                                type="text"
+                                placeholder="Pincode"
+                                className="w-full px-4 py-2 border border-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
+                                required
+                                onChange={onChangeHandler}
+                                name="pinCode"
+                                value={formData.pinCode}
+                            />
+                            <input
+                                type="text"
+                                placeholder="Country"
+                                className="w-full px-4 py-2 border border-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
+                                required
+                                onChange={onChangeHandler}
+                                name="country"
+                                value={formData.country}
+                            />
+                            <input
+                                type="tel"
+                                placeholder="Phone"
+                                className="w-full px-4 py-2 border border-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-black md:col-span-2"
+                                required
+                                onChange={onChangeHandler}
+                                name="phone"
+                                value={formData.phone}
+                            />
                         </div>
                         <button
                             type='submit'
                             disabled={loading}
-                            className='lg:hidden w-full bg-black text-white font-bold py-3 rounded-lg hover:bg-gray-800 transition-colors duration-200 flex items-center justify-center disabled:opacity-50'
+                            className='lg:hidden w-full bg-black text-white font-bold py-3 rounded-lg hover:bg-gray-800 transition-colors duration-200 flex items-center justify-center disabled:opacity-50 cursor-pointer'
                         >
                             {loading ? <ClipLoader size={20} color='white' /> : "PLACE ORDER"}
                         </button>
@@ -281,14 +340,14 @@ const PlaceOrder = () => {
                             <button
                                 type="button"
                                 onClick={() => setMethod('razorpay')}
-                                className={`w-1/2 h-16 rounded-lg overflow-hidden border-2 transition-all duration-200 ${method === 'razorpay' ? 'border-black ring-2 ring-black' : 'border-gray-400 hover:border-gray-600'}`}
+                                className={`w-1/2 h-16 rounded-lg overflow-hidden cursor-pointer  border-2 transition-all duration-200 ${method === 'razorpay' ? 'border-black ring-2 ring-black' : 'border-gray-400 hover:border-gray-600'}`}
                             >
-                                <img src='https://res.cloudinary.com/dm9d1j35j/image/upload/v1721597405/e-commerce/razorpay-icon_g0rckp.png' className='w-full h-full object-contain p-2' alt="Razorpay" />
+                                <img src='https://upload.wikimedia.org/wikipedia/commons/8/89/Razorpay_logo.svg' className='w-full h-full object-contain p-2' alt="Razorpay" />
                             </button>
                             <button
                                 type="button"
                                 onClick={() => setMethod('cod')}
-                                className={`w-1/2 h-16 bg-gray-100 text-black font-bold rounded-lg overflow-hidden border-2 transition-all duration-200 ${method === 'cod' ? 'border-black ring-2 ring-black' : 'border-gray-400 hover:border-gray-600'}`}
+                                className={`w-1/2 h-16 bg-gray-100 text-black  cursor-pointer font-bold rounded-lg overflow-hidden border-2 transition-all duration-200 ${method === 'cod' ? 'border-black ring-2 ring-black' : 'border-gray-400 hover:border-gray-600'}`}
                             >
                                 Cash on Delivery
                             </button>
@@ -298,7 +357,7 @@ const PlaceOrder = () => {
                         type='submit'
                         form='place-order-form'
                         disabled={loading}
-                        className='hidden lg:flex w-full bg-black text-white font-bold py-3 rounded-lg hover:bg-gray-800 transition-colors duration-200 items-center justify-center disabled:opacity-50'
+                        className='hidden lg:flex w-full bg-black text-white font-bold py-3 rounded-lg hover:bg-gray-800 transition-colors duration-200 items-center justify-center disabled:opacity-50 cursor-pointer'
                     >
                         {loading ? <ClipLoader size={20} color='white' /> : "PLACE ORDER"}
                     </button>

@@ -45,9 +45,9 @@ export const placeOrderRazorpay = async (req, res) => {
 
         // Validate required fields
         if (!items || !amount || !address || !userId) {
-            return res.status(400).json({ 
-                success: false, 
-                message: 'Missing required fields' 
+            return res.status(400).json({
+                success: false,
+                message: 'Missing required fields'
             });
         }
 
@@ -65,7 +65,7 @@ export const placeOrderRazorpay = async (req, res) => {
         await newOrder.save()
 
         const options = {
-            amount: amount * 100, // Amount in smallest currency unit (paise)
+            amount: amount * 100,
             currency: currency.toUpperCase(),
             receipt: newOrder._id.toString(),
             notes: {
@@ -75,9 +75,9 @@ export const placeOrderRazorpay = async (req, res) => {
         }
 
         const order = await razorpayInstance.orders.create(options);
-        
-        return res.status(200).json({ 
-            success: true, 
+
+        return res.status(200).json({
+            success: true,
             data: order,
             key: process.env.RAZORPAY_KEY_ID
         });
@@ -116,17 +116,17 @@ export const verifyRazorpay = async (req, res) => {
         if (isAuthentic) {
             // Fetch order info to get receipt (order ID in our database)
             const orderInfo = await razorpayInstance.orders.fetch(razorpay_order_id);
-            
+
             // Update order status
-            await Order.findByIdAndUpdate(orderInfo.receipt, { 
+            await Order.findByIdAndUpdate(orderInfo.receipt, {
                 payment: true,
                 paymentId: razorpay_payment_id,
                 razorpayOrderId: razorpay_order_id
             });
-            
+
             // Clear user cart
             await User.findByIdAndUpdate(userId, { cartData: {} });
-            
+
             res.status(200).json({
                 success: true,
                 message: 'Payment Successful'
@@ -170,7 +170,7 @@ export const allOrders = async (req, res) => {
 
 export const updateStatus = async (req, res) => {
     try {
-        const { orderId, status } = req.body
+        const { orderId, status } = req.body;
 
         if (!orderId || !status) {
             return res.status(400).json({
@@ -178,13 +178,17 @@ export const updateStatus = async (req, res) => {
                 message: 'Order ID and status are required'
             });
         }
-
-        await Order.findByIdAndUpdate(orderId, { status })
-        return res.status(200).json({ success: true, message: 'Status Updated' })
+        const updateData = { status };
+        if (status === 'Delivered') {
+            updateData.payment = true;
+        }
+        await Order.findByIdAndUpdate(orderId, updateData);
+        return res.status(200).json({ success: true, message: 'Status Updated' });
     } catch (error) {
+        console.error("Error updating status:", error);
         return res.status(500).json({
             success: false,
-            message: error.message
-        })
+            message: error.message || 'Failed to update status'
+        });
     }
-}
+};

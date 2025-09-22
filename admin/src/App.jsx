@@ -8,29 +8,38 @@ import Login from './pages/Login.jsx';
 import { adminDataContext } from './context/AdminContext.jsx';
 import { ToastContainer } from 'react-toastify';
 import AdminNavbar from './components/AdminNavbar.jsx';
+import ClipLoader from 'react-spinners/ClipLoader';
 
 const App = () => {
-  const { adminData } = useContext(adminDataContext);
-  const location = useLocation();
-  const hideNavbar = location.pathname === '/login' || location.pathname === '/signup';
+    const { adminData, loading } = useContext(adminDataContext);
+    const location = useLocation();
+    const hideNavbar = location.pathname === '/login' || location.pathname === '/signup';
 
-  if (!adminData) {
-    return <Login />;
-  }
+    if (loading) {
+        return (
+            <div className="flex items-center justify-center min-h-screen bg-white">
+                <ClipLoader color="#9B59B6" size={50} />
+            </div>
+        );
+    }
 
-  return (
-    <>
-      <ToastContainer />
-      {!hideNavbar && <AdminNavbar />}
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/admin/add-items' element={<Add />} />
-        <Route path='/admin/list-items' element={<Lists />} />
-        <Route path='/admin/orders' element={<Orders />} />
-        <Route path='/login' element={<Login />} />
-      </Routes>
-    </>
-  );
+    if (!adminData) {
+        return <Login />;
+    }
+
+    return (
+        <>
+            <ToastContainer />
+            {!hideNavbar && <AdminNavbar />}
+            <Routes>
+                <Route path='/admin/dashboard' element={<Home />} />
+                <Route path='/admin/add-items' element={<Add />} />
+                <Route path='/admin/list-items' element={<Lists />} />
+                <Route path='/admin/view-orders' element={<Orders />} />
+                <Route path='/login' element={<Login />} />
+            </Routes>
+        </>
+    );
 };
 
 export default App;

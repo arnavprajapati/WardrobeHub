@@ -170,18 +170,15 @@ const Collections = () => {
                         </div>
                     </div>
 
-                    <div className="flex flex-wrap justify-center lg:justify-start lg:gap-28 gap-6 px-4 lg:px-0">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 px-4 lg:px-0">
                         {filteredProducts.length > 0 ? (
                             filteredProducts.map((product) => (
-                                <div
-                                    key={product._id}
-                                    className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 p-2"
-                                >
+                                <div key={product._id}>
                                     <Card product={product} />
                                 </div>
                             ))
                         ) : (
-                            <div className="w-full text-center py-10 text-gray-500">
+                            <div className="col-span-full text-center py-10 text-gray-500">
                                 No products found. Try adjusting your filters.
                             </div>
                         )}

@@ -95,11 +95,11 @@ const ProductDetail = () => {
 
                         <div className="space-y-3 -mt-1">
                             <label className="text-sm text-gray-700">Select Size</label>
-                            <div className="flex gap-3 mt-4">
+                            <div className="flex gap-3 mt-4 ">
                                 {productData.sizes && productData.sizes.map((item, index) => (
                                     <button
                                         key={index}
-                                        className={`w-14 h-14 rounded-full text-sm transition-all duration-200 ${
+                                        className={`w-14 h-14 rounded-full text-sm transition-all cursor-pointer duration-200 ${
                                             item === size
                                                 ? 'bg-gray-800 text-white border-2 border-black shadow-md'
                                                 : 'bg-gray-100 text-gray-700 border border-gray-300 hover:bg-gray-200'
@@ -115,7 +115,7 @@ const ProductDetail = () => {
                         <button
                             onClick={() => addCart(productData._id, size)}
                             disabled={loading || !size}
-                            className="bg-gray-800 hover:bg-black disabled:bg-gray-500 text-white py-3 px-8 rounded-lg shadow-md w-full mt-6 transition-colors duration-200 flex items-center justify-center"
+                            className="bg-gray-800 hover:bg-black disabled:bg-gray-500 text-white py-3 px-8 rounded-lg shadow-md w-full mt-6 transition-colors duration-200 flex items-center justify-center cursor-pointer"
                         >
                             {loading ? <ClipLoader size={16} color="white" /> : 'Add to Cart'}
                         </button>

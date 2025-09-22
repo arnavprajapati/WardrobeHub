@@ -34,7 +34,7 @@ const SignUpPage = () => {
                 withCredentials: true,
             });
             // console.log(result.data);
-            navigate("/");
+            navigate("/login");
             toast.success("Sign Up Successful 🎉");
         } catch (error) {
             // console.log(error);

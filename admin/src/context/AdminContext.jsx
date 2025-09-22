@@ -1,41 +1,41 @@
-import React, { createContext, useContext, useEffect, useState } from 'react'
-import { authDataContext } from './AuthContext'
-import axios from 'axios'
+import React, { createContext, useContext, useEffect, useState } from 'react';
+import { authDataContext } from './AuthContext';
+import axios from 'axios';
 
-export const adminDataContext = createContext()
+export const adminDataContext = createContext();
+
 function AdminContext({ children }) {
-    let [adminData, setAdminData] = useState(null)
-    let { serverURL } = useContext(authDataContext)
-
+    const [adminData, setAdminData] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const { serverURL } = useContext(authDataContext);
 
     const getAdmin = async () => {
         try {
-            let result = await axios.get(`${serverURL}/api/user/getadmin`, { withCredentials: true })
-
-            setAdminData(result.data)
-            // console.log(result.data)
+            const result = await axios.get(`${serverURL}/api/user/getadmin`, { withCredentials: true });
+            setAdminData(result.data);
         } catch (error) {
-            setAdminData(null)
-            // console.log(error)
+            setAdminData(null);
+        } finally {
+            setLoading(false);
         }
-    }
+    };
 
     useEffect(() => {
-        getAdmin()
-    }, [])
+        getAdmin();
+    }, []);
 
+    const value = {
+        adminData,
+        setAdminData,
+        getAdmin,
+        loading 
+    };
 
-    let value = {
-        adminData, setAdminData, getAdmin
-    }
     return (
-        <div>
-            <adminDataContext.Provider value={value}>
-                {children}
-            </adminDataContext.Provider>
-
-        </div>
-    )
+        <adminDataContext.Provider value={value}>
+            {children}
+        </adminDataContext.Provider>
+    );
 }
 
-export default AdminContext
+export default AdminContext;

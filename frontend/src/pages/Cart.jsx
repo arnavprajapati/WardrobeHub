@@ -161,7 +161,7 @@ const Cart = () => {
                                         // console.log('Your cart is empty!');
                                     }
                                 }}
-                                className="mt-6 w-full bg-gray-900 text-white py-3 rounded-lg hover:bg-gray-700 transition-colors duration-200"
+                                className="mt-6 cursor-pointer w-full bg-gray-900 text-white py-3 rounded-lg hover:bg-gray-700 transition-colors duration-200"
                             >
                                 Proceed to checkout
                             </button>

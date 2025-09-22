@@ -17,6 +17,7 @@ const MONGO_URI = process.env.MONGO_URI;
 const allowedOrigins = [
     process.env.CLIENT_URL,
     'http://localhost:5173',
+    'http://localhost:5174',
     'https://wardrobehub-frontend.onrender.com',
     'https://wardrobehub-admin.onrender.com'
 ];
@@ -41,12 +42,14 @@ import userRouter from './routes/userRoute.js';
 import productRouter from './routes/poductRoutes.js'
 import cartRouter from './routes/cartRoute.js'
 import orderRouter from './routes/orderRoute.js'
+import wishListRouter from './routes/wishRoute.js'
 
 app.use('/api/auth', authRouter);
 app.use('/api/user', userRouter);
 app.use("/api/product", productRouter)
 app.use("/api/cart", cartRouter)
 app.use("/api/order", orderRouter)
+app.use("/api/wishlist", wishListRouter);
 
 
 app.get('/', (req, res) => {
