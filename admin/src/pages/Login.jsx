@@ -102,12 +102,6 @@ const LoginPage = () => {
                         {loading ? <ClipLoader size={24} color="white" /> : "Log In"}
                     </button>
                 </form>
-
-                <div className="my-6 flex items-center">
-                    <div className="flex-1 border-t border-gray-300"></div>
-                    <span className="px-4 text-gray-500 text-sm">or</span>
-                    <div className="flex-1 border-t border-gray-300"></div>
-                </div>
             </div>
         </div>
     );

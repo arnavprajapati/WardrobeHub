@@ -39,7 +39,7 @@ const LoginPage = () => {
       const result = await axios.post(serverURL + "/api/auth/login", formData, {
         withCredentials: true,
       });
-      await getCurrentUser(); 
+      await getCurrentUser();
       toast.success("Login Successful 🎉");
       navigate("/");
     } catch (error) {
@@ -136,6 +136,18 @@ const LoginPage = () => {
           <FaGoogle className="text-red-500" />
           <span>Log in with Google</span>
         </button>
+
+        <p className="text-center text-gray-600 text-sm mt-6">
+          Are you an administrator?
+          <a
+            href="https://wardrobehub-admin.onrender.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-indigo-600 ml-1 font-medium hover:underline"
+          >
+            Go to Admin Login
+          </a>
+        </p>
 
         <p className="text-center text-gray-600 text-sm mt-6">
           Don’t have an account?
